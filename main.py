@@ -43,9 +43,9 @@ class main(object):
                 entry = line.split(',')
                 nameList.append(entry[0])
             if name not in nameList:
-                now = datetime.now()
-                dtString = now.strftime('%H:%M:%S')
-                f.writelines(f'\n{name},{dtString}')
+                #now = datetime.now()
+                #dtString = now.strftime('%H:%M:%S')
+                f.writelines(f'\n{name},')
 
     #### FOR CAPTURING SCREEN RATHER THAN WEBCAM
     # def captureScreen(bbox=(300,300,690+300,530+300)):
