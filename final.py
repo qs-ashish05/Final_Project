@@ -1,5 +1,5 @@
 import AddPerson
-import main
+from main import main
 
 
 while(True):
@@ -10,4 +10,6 @@ while(True):
          #print("New person is added")
          AddPerson.AddPerson()
      if c ==2:
+        m = main()
+        m.runCamera()
          
