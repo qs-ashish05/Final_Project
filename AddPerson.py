@@ -1,14 +1,16 @@
 import cv2
 import os
 import numpy as np
+from Gui import Ui_Dialog
+from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-print("Dependencies are loaded")
-
-def AddPerson():
-    name = input("Enter name of person : ")
-    roll = input("Enter Roll_no. of the person : ")
-
+def AddPerson(name,roll):
+    # name = input("Enter name of person : ")
+    # roll = input("Enter Roll_no. of the person : ")
+    
+    name = name
+    roll = roll
     #cwd = os.getcwd()
     #train.var = cwd
     img = str(roll)+"_"+name
@@ -32,7 +34,7 @@ def AddPerson():
 
     img_counter = 0
 
-    while img_counter < 30:
+    while img_counter < 10:
         ret,frame = cam.read()
 
         if not ret:
@@ -57,5 +59,11 @@ def AddPerson():
 
     cam.release()
     os.chdir("../")
+    Dialog = QtWidgets.QDialog()
+    ui = Ui_Dialog()
+    ui.setupUi(Dialog)
+    Dialog.show()
+    Dialog.exec_()
+    #exit(0)
     #cam.destroyAllWindows()
 
