@@ -22,15 +22,15 @@ class Ui_Dialog(object):
         # a = Ui_On_click_ANP()
         # On_click_ANP = QtWidgets.QDialog()
         
-        #self.Add_New_Person.clicked.connect(lambda : AddPerson.AddPerson())
+        self.Add_New_Person.clicked.connect(lambda : self.Anp())
         #self.Add_New_Person.clicked.connect(lambda : a.setupUi(On_click_ANP))
     
 
         self.Take_Attendance = QtWidgets.QPushButton(Dialog)
         self.Take_Attendance.setGeometry(QtCore.QRect(350, 290, 131, 28))
         self.Take_Attendance.setObjectName("Take_Attendance")
-        #m = main()
-        #self.Take_Attendance.clicked.connect(lambda : m.runCamera())
+        m = main()
+        self.Take_Attendance.clicked.connect(lambda : m.runCamera())
 
         self.Exit = QtWidgets.QPushButton(Dialog)
         self.Exit.setGeometry(QtCore.QRect(350, 350, 131, 28))
@@ -45,6 +45,13 @@ class Ui_Dialog(object):
         self.Add_New_Person.setText(_translate("Dialog", "Add New Person"))
         self.Take_Attendance.setText(_translate("Dialog", "Take Attendance"))
         self.Exit.setText(_translate("Dialog", "Exit"))
+
+    def Anp(self):
+        On_click_ANP = QtWidgets.QDialog()
+        o = Ui_On_click_ANP()
+        o.setupUi(On_click_ANP)
+        On_click_ANP.show()
+        On_click_ANP.exec_()
 
 
 if __name__ == "__main__":

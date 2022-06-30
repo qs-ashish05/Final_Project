@@ -37,7 +37,7 @@ class main(object):
         with open('Attendance.csv', 'r+') as f:
             myDataList = f.readlines()
 
-            print("Hi")
+            #print("Hi")
             nameList = []
             for line in myDataList:
                 entry = line.split(',')
