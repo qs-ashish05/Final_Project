@@ -1,15 +1,15 @@
 from datetime import date
+import pandas as pd
 
-def Write_in_csv(): 
-    f = open("Attendance.csv","a+")
-    line = f.readlines()
+def Write_in_csv(namelist): 
+    namelist = namelist
 
-    f1 = open("Final.csv","a+")
     today = date.today()
     DATE = today.strftime("%m/%d/%y")
-    f1.writelines(f"{DATE},")
-    f1.writelines(line)
-    f1.close()
 
+    column = {DATE : namelist}
 
-Write_in_csv()
+    df = pd.DataFrame(column,columns=[DATE])
+
+    df.to_csv(f"Attendane_of_Today.csv")
+    print('File is generated')

@@ -11,22 +11,11 @@ def AddPerson(name,roll):
     
     name = name
     roll = roll
-    #cwd = os.getcwd()
-    #train.var = cwd
     img = str(roll)+"_"+name
 
     
-    #os.mkdir("Store_images")
     os.chdir("Training_images")
 
-    #var = os.getcwd()
-
-    #os.mkdir(dir)
-    #os.chdir(dir)
-    #cwd1 = os.getcwd()
-
-    # print("here images are stored")
-    # print(cwd1)
 
     cam = cv2.VideoCapture(0)
 
@@ -62,6 +51,7 @@ def AddPerson(name,roll):
     Dialog = QtWidgets.QDialog()
     ui = Ui_Dialog()
     ui.setupUi(Dialog)
+
     Dialog.show()
     Dialog.exec_()
     #exit(0)

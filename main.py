@@ -1,8 +1,11 @@
 import cv2
 import numpy as np
+import pandas as pd
 import face_recognition
 import os
-from datetime import datetime
+from datetime import date
+import write_csv
+
 
 # from PIL import ImageGrab
 
@@ -28,24 +31,37 @@ class main(object):
 
         for img in images:
             img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-            encode = face_recognition.face_encodings(img)[0]
+            encode = face_recognition.face_encodings(img) #[0]
             encodeList.append(encode)
         return encodeList
 
 
     def markAttendance(self, name):
-        with open('Attendance.csv', 'r+') as f:
-            myDataList = f.readlines()
 
             #print("Hi")
-            nameList = []
-            for line in myDataList:
-                entry = line.split(',')
-                nameList.append(entry[0])
-            if name not in nameList:
+        nameList = []
+
+        nameList.append(name)
+
+        today = date.today()
+        DATE = today.strftime("%m/%d/%y")
+
+        column = {DATE : nameList}
+
+        df = pd.DataFrame(column,columns=[DATE])
+
+        df.to_csv(f"Attendane_of_Today.csv")
+        #print('File is generated')
+           # print(name)
+            #write_csv.Write_in_csv(nameList)
+
+            ###if name not in nameList:
                 #now = datetime.now()
                 #dtString = now.strftime('%H:%M:%S')
-                f.writelines(f'\n{name},')
+                #f.writelines(f'\n{name},')
+                ###write_csv.Write_in_csv(nameList)
+
+           
 
     #### FOR CAPTURING SCREEN RATHER THAN WEBCAM
     # def captureScreen(bbox=(300,300,690+300,530+300)):
