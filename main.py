@@ -38,7 +38,7 @@ class main(object):
 
     def markAttendance(self, name):
 
-            #print("Hi")
+        #print("Hi")
         nameList = []
 
         nameList.append(name)
