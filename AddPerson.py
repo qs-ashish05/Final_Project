@@ -23,7 +23,7 @@ def AddPerson(name,roll):
 
     img_counter = 0
 
-    while img_counter < 10:
+    while img_counter < 1:
         ret,frame = cam.read()
 
         if not ret:
