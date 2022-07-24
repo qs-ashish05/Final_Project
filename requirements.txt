@@ -2,8 +2,8 @@ certifi
 chardet
 click
 cmake
-decorator
-dlib
+decorator==4.4.2
+dlib==19.15.0
 face-recognition
 face-recognition-models
 idna
@@ -11,10 +11,11 @@ imageio
 imageio-ffmpeg
 moviepy
 numpy
-opencv-python
+opencv-python-headless
 Pillow
 proglog
 requests
 tqdm
 urllib3
 wincertstore
+pandas
