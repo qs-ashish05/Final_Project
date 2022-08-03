@@ -59,6 +59,6 @@ if __name__ == "__main__":
     w1 = dialogMain()
     w2 = dialogANP()
     w1.Add_New_Person.clicked.connect(w2.show)
-    w2.Ok_btn.clicked.connect(w1.show)
+    w2.add_entry_btn.clicked.connect(w1.show)
     w1.show()
     sys.exit(app.exec_())
