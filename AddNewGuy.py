@@ -52,9 +52,9 @@ class Ui_On_click_ANP(object):
         self.timer.timeout.connect(self.viewCam)
         # set control_bt callback clicked  function
         self.add_entry_btn.clicked.connect(lambda: self.AddPerson())
-        self.controlTimer()
+        # self.controlTimer()
         # self.ui.control_bt.clicked.connect(self.controlTimer)
-
+        
 
     def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate
@@ -71,6 +71,10 @@ class Ui_On_click_ANP(object):
         img_name = img+".png"
         cv2.imwrite(img_name,cv2.cvtColor(self.image, cv2.COLOR_BGR2RGB))
         print("screen shot taken")
+        # stop timer
+        self.timer.stop()
+        # release video capture
+        self.cap.release()
         self.close()
 
 
