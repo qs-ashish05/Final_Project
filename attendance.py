@@ -4,7 +4,7 @@ import time
 import numpy as np
 import pandas as pd
 import face_recognition
-from datetime import date, datetime
+import datetime
 from PIL import Image as im
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -22,7 +22,7 @@ class Ui_On_click_Take_Attendance(object):
         self.take_attendance_btn = QtWidgets.QPushButton(self.On_click_Take_Attendance)
         self.take_attendance_btn.setGeometry(QtCore.QRect(300, 450, 100, 25))
         self.take_attendance_btn.setObjectName("take_attendance_btn")
-        self.take_attendance_btn.clicked.connect(lambda: self.close())
+        self.take_attendance_btn.clicked.connect(self.genCSV)
         self.retranslateUi()
         QtCore.QMetaObject.connectSlotsByName(self.On_click_Take_Attendance)
 
@@ -31,12 +31,12 @@ class Ui_On_click_Take_Attendance(object):
         # set timer timeout callback function
         self.timer.timeout.connect(self.viewCam)
         # set control_bt callback clicked  function
-        self.take_attendance_btn.clicked.connect(lambda: self.close())
         os.chdir('..')
         
         self.path = 'Training_images'
         self.images = []
         self.classNames = []
+        self.name_list = []
         self.myList = os.listdir(self.path)
         for cl in self.myList:
             curImg = cv2.imread(f'{self.path}/{cl}')
@@ -51,22 +51,26 @@ class Ui_On_click_Take_Attendance(object):
         for img in self.images:
             img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
             encode = face_recognition.face_encodings(img)[0]
+            #print(face_recognition.face_encodings(img))
             encodeList.append(encode)
         return encodeList
 
+    def genCSV(self):
+        x = datetime.datetime.now()
+        title = f'File_{x.strftime("%d_%B_%Y_%H_%M_%S")}.csv'
+        self.df.to_csv(title,index = False)
+        self.close()
 
     def markAttendance(self, name):
-        with open('Attendance.csv', 'r+') as f:
-            myDataList = f.readlines()
+        length = len(self.name_list)
+        x = datetime.datetime.now()
+        if name not in self.name_list:
+            self.name_list.append(name)
+        
 
-            nameList = []
-            for line in myDataList:
-                entry = line.split(',')
-                nameList.append(entry[0])
-                if name not in nameList:
-                    now = datetime.now()
-                    dtString = now.strftime('%H:%M:%S')
-                    f.writelines(f'\n{name},{dtString}')
+        if length != len(self.name_list):
+            self.df = pd.DataFrame(self.name_list,columns =  [x.strftime("%d %B %Y")])
+            #print(df)
 
 #### FOR CAPTURING SCREEN RATHER THAN WEBCAM
 # def captureScreen(bbox=(300,300,690+300,530+300)):
